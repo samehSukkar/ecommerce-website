@@ -8,10 +8,11 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(Category)
-class ProductAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
    list_display = ["name"]
 
 @admin.register(Tag)
-class ProductAdmin(admin.ModelAdmin):
+class TagAdmin(admin.ModelAdmin):
    list_display = ["tagname"]
+   fields = ['tagname']
 

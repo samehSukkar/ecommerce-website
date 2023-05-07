@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'api',
     'products',
+    'orders',
 
 ]
 
@@ -138,3 +139,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':'api.pagination.PageNumberCountPagination',
    
 }
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
