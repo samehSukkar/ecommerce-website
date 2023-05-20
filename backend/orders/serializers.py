@@ -6,33 +6,33 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth import password_validation
 
-class ItemProductSerialzer(serializers.ModelSerializer):
+class ItemProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price']
+        fields = ['id', 'name', 'price', 'image']
 
 
-class CartItemSerialzer(serializers.ModelSerializer):
-    product = ItemProductSerialzer() 
+class CartItemSerializer(serializers.ModelSerializer):
+    product = ItemProductSerializer() 
     class Meta:
         model = CartItem
         fields = ['id', 'product', 'quantity']
 
 
-class CreateCartItemSerialzer(serializers.ModelSerializer):
+class CreateCartItemSerializer(serializers.ModelSerializer):
         
         class Meta:
             model = CartItem
-            fields = ['id', 'product', 'quantity'] 
+            fields = ['product', 'quantity'] 
     
 
 class OrderItemSerializer(serializers.ModelSerializer):
-     product = ItemProductSerialzer()
+     product = ItemProductSerializer()
      class Meta:
             model = OrderItem
             fields = ['product', 'quantity']
 
-class OrderSerialzer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     orderitem_set = OrderItemSerializer(many=True)
     total = serializers.ReadOnlyField()
     class Meta:

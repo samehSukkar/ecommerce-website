@@ -1,35 +1,38 @@
-import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import cardimg from '../assets/iphone12.png'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import axios from 'axios';
+import ItemCard from './ItemCard';
+const baseurl = 'http://127.0.0.1:8000'
+
 
 const Home = () => {
-    const item1 = {
-        'id':1,
-        'name': 'iphone12',
-        'category': 'phones',
-        'price': 140,
-    }
-    const [items , setItems] = useState([item1,])
+    
+
+    const [items , setItems] = useState([])
+    useEffect(() => {
+        fetch(`${baseurl}/api/products`)
+        .then(response => response.json())
+        .then(data => setItems(data.results))
+      },[])
+
 
   return (
     <>
-        <Container  style={{padding: '50px'}}>
-        
-            <Card  className="text-center" style={{ width: '12rem' , padding: '20px 5px 0px 5px'}}>
-                <Card.Img variant="top" src={cardimg} style={{width: '8rem', margin: 'auto'}}/>
-                <Card.Body>
-                    <Card.Title  style={{marginBottom: '5px'}}>iPhone12</Card.Title>
-                    <Card.Text style={{marginBottom: '5px'}}>820 JD</Card.Text>
-                    <Card.Link>#apple</Card.Link>
-                    <Card.Link>#Black</Card.Link>
-                    <Button variant="dark"  style={{display:'block', marginTop: '5px', marginInline: 'auto'}}>Add to Cart</Button>
-                </Card.Body>
-            </Card>    
+        <Container style={{padding: '50px'}}>
+            <Row>
+                {items.map((item) => 
+                    <Col key={item.id} sm={6} lg={4} xl={3} style={{marginBottom:'20px'}}>
+                        <ItemCard item={item}/>
+                     </Col>
+                )}
+            </Row>
         </Container>
     </>
   )
 }
+
+
 
 export default Home
