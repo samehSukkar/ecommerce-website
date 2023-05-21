@@ -8,7 +8,6 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { useAuth } from './auth';
-
 import CartItem from './CartItem';
 import { Navigate, useNavigate } from 'react-router-dom';
 const baseurl = 'http://127.0.0.1:8000'
@@ -61,8 +60,21 @@ const Cart = () => {
         return total;
       }
       
+      const createOrder = () => {
+        const config = {
+          headers: { 
+            
+            'Authorization': `Token ${localStorage.getItem('token')}`
+            },
+        };
+
+        axios.post(`${baseurl}/api/order/create`, config)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+      }
+
       return (
-      !auth.authnticated ? <Navigate to="/login" />  :
+      !auth.authnticated ? <Navigate to="/login"/>  :
       <section className="h-100 h-custom" style={{ backgroundColor: "#eee", minHeight:'calc(100vh - 45px)' }}>
         <Container className="py-5 h-100">
           <Row style={{minWidth:'400px'}}className="justify-content-center align-items-center h-100">
@@ -93,7 +105,14 @@ const Cart = () => {
 
                     </Col>
                   </Row>  {/* cart body */}
+                  {
+                   items.length ?
+                  <Row className='d-flex justify-content-center px-3 col-md-6'>
+                    <Button variant="success" onClick={createOrder}>create order</Button>
+                  </Row> : <></>
+                  }
                 </Card.Body>
+
               </Card>
             </Col>
           </Row>

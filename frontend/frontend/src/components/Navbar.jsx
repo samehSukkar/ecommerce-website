@@ -44,8 +44,15 @@ function ColorSchemesExample() {
                     <Nav className="ms-auto">
                         <Nav.Link  href="/cart">Cart</Nav.Link>
                         {
-                            !auth.authnticated ?  <Nav.Link  href="/login">login</Nav.Link> : 
+                            !auth.authnticated ?
+                            <>
+                            <Nav.Link  href="/login">login</Nav.Link> 
+                            <Nav.Link  href="/register">register</Nav.Link> 
+                            </> :
+                            <>
                             <Nav.Link  href="/logout">logout</Nav.Link>
+                            <Nav.Link  href="/orders">orders</Nav.Link>
+                            </>
                         }
                        
                       

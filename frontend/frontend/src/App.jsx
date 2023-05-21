@@ -11,7 +11,8 @@ import Cart from './components/Cart';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import { AuthProvider } from './components/auth';
-
+import Register from './components/Register';
+import Orders from './components/Orders';
 function App() {
 
   return (
@@ -24,10 +25,12 @@ function App() {
         <Route path='/categoreis/:id' element={<Category/>}/>
         <Route path='/tags/:id' element={<Tag/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/orders' element={<Orders/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/logout' element={<Logout/>}/>
+        <Route path='/register' element={<Register/>}/>
       </Routes>
-      
+
     </AuthProvider>
   )
 }
