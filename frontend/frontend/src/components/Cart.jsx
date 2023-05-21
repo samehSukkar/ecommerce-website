@@ -61,16 +61,22 @@ const Cart = () => {
       }
       
       const createOrder = () => {
-        const config = {
-          headers: { 
-            
-            'Authorization': `Token ${localStorage.getItem('token')}`
-            },
-        };
-
-        axios.post(`${baseurl}/api/order/create`, config)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err))
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'http://127.0.0.1:8000/api/order/create',
+            headers: { 
+              'Authorization': 'Token 3beff4c08e4083a4ff6519156dee9a84379004d2'
+            }
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          })
       }
 
       return (
